@@ -1,5 +1,5 @@
 <h1>Генератор звітів</h1>
-<%= form_with url: "/reports/report_by_category", method: :get do |form| %>
+<%= form_with url: "report_by_category", method: :get do |form| %>
     <%= form.label :start, "Дата YYYY-MM-DD" %>
     <%= form.date_field :start %>
     <br>
@@ -10,4 +10,7 @@
     <%= form.collection_select :category_id, Category.order(:name), :id, :name %>
     <br>
     <%= form.submit "Згенерувати" %>
+    <%= form.submit "Очистити", :type => "reset" %>
+    <%= form.submit "Графік",  formaction: 'some_route_path' %> 
+    <%= form.submit "По датам",  formaction: 'report_by_dates' %> 
 <% end %>
