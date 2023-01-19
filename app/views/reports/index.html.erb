@@ -1,10 +1,10 @@
 <h1>Генератор звітів</h1>
 <%= form_with method: :get do |form| %>
-    <%= form.label :start, "Дата YYYY-MM-DD" %>
-    <%= form.date_field :start %>
+    <%= form.label :start_date, "Дата YYYY-MM-DD" %>     <%#Validation between two date rails https://stackoverflow.com/questions/47276147/validation-between-two-date-rails%>
+    <%= form.date_field :start_date %>
     <br>
-    <%= form.label :end, "Дата YYYY-MM-DD" %>
-    <%= form.date_field :end %>
+    <%= form.label :end_date, "Дата YYYY-MM-DD" %>
+    <%= form.date_field :end_date %>
     <br>
     <%= form.label :category, "Категорія" %>
     <%= form.collection_select :category_id, Category.order(:name), :id, :name %>
