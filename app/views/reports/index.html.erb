@@ -6,6 +6,9 @@
     <%= form.label :end_date, "Дата YYYY-MM-DD" %>
     <%= form.date_field :end_date %>
     <br>
+    <%= form.label :category, "Тип операції" %>
+    <%= form.collection_select :otype_id, Otype.order(:title), :id, :title %>
+    <br>
     <%= form.label :category, "Категорія" %>
     <%= form.collection_select :category_id, Category.order(:name), :id, :name %>
     <br>
