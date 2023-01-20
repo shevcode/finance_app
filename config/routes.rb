@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :otypes
   get 'reports/index'
   get 'reports/report_by_category'
   get 'reports/report_by_dates'

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @otype %>
+
+<div>
+  <%= link_to "Edit this otype", edit_otype_path(@otype) %> |
+  <%= link_to "Back to otypes", otypes_path %>
+
+  <%= button_to "Destroy this otype", @otype, method: :delete %>
+</div>

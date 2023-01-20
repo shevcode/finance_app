@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Otypes</h1>
+
+<div id="otypes">
+  <% @otypes.each do |otype| %>
+    <%= render otype %>
+    <p>
+      <%= link_to "Show this otype", otype %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New otype", new_otype_path %>
