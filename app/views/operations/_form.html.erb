@@ -28,12 +28,14 @@
 
   <div>
     <%= form.label :category_id, style: "display: block" %>
-    <%= form.text_field :category_id %>
+    <%= form.collection_select :category_id, Category.order(:name), :id, :name %>
   </div>
 
   <div>
-    <%= form.label :type, style: "display: block" %>
-    <%= form.text_field :type %>
+    <%= form.label :otype, style: "display: block" %>
+    <%= form.select :otype, Operation.otypes.keys.to_a %>
+
+
   </div>
 
   <div>
