@@ -27,16 +27,16 @@
   </div>
 
   <div>
+    <%= form.label :otype_id, style: "display: block" %>
+    <%= form.collection_select :otype_id, Otype.order(:title), :id, :title %>
+  </div>
+
+  <div>
     <%= form.label :category_id, style: "display: block" %>
     <%= form.collection_select :category_id, Category.order(:name), :id, :name %>
   </div>
 
-  <div>
-    <%= form.label :otype, style: "display: block" %>
-    <%= form.select :otype, Operation.otypes.keys.to_a %>
-
-
-  </div>
+  
 
   <div>
     <%= form.submit %>

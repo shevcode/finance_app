@@ -12,5 +12,6 @@ require "faker"
         odate: Faker::Date.backward(days: 10),
         description: Faker::Quote.yoda,
         category_id: Faker::Number.between(from: 1, to: 3)
+        otype_id: Faker::Number.between(from: 1, to: 2)
     )
 end
