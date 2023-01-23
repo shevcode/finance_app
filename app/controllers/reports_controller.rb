@@ -3,7 +3,13 @@ class ReportsController < ApplicationController
   class Report
     include ActiveModel::Model
     attr_accessor :start_date, :end_date, :otype_name, :otype_id, :category_id, :category_groups, :total
-    validates :start_date, :end_date, :otype_id, :category_id, presence: true
+    validates :start_date, :end_date, presence: true #TODO check: 1)second date > first date  2)at least one date is not blank
+  end
+  class ReportByCategory < Report
+    validates :otype_id, presence: true
+  end
+  class ReportByDates < Report
+    validates :otype_id, :category_id, presence: true
   end
 
   def index
@@ -11,18 +17,21 @@ class ReportsController < ApplicationController
   end
 
   def report_by_category
-    @report = Report.new(@report_params)
+    @report = ReportByCategory.new(@report_params)
     if @report.valid?
-      category_groups = Operation.select(:category_id, :amount).where(otype: @report.otype_id, odate: @report.start_date..@report.end_date).group(:category_id).sum(:amount)
-      @report.total = category_groups.sum { |_, a| a }
+      @report.category_groups = 
+        Operation
+          .joins(:category)
+          .where(otype: @report.otype_id, odate: @report.start_date..@report.end_date)
+          .group(:name)
+          .sum(:amount)
+          
+      @report.total = @report.category_groups.sum { |_, a| a }  
       @report.otype_name = Otype.find(@report.otype_id).title
-      categories = Category.select(:id, :name).where(id: category_groups.keys).index_by(&:id)  #one request to Category table instead many requests to find each category name
-      @report.category_groups = category_groups.transform_keys { |key| categories[key].name }
       render :report_by_category
     else
       render :index, status: :unprocessable_entity
     end
- 
   end
 
   def report_by_dates
