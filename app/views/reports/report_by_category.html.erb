@@ -1,2 +1,6 @@
-<h1>Звіт за період: <%= @report_params[:start_date]%> - <%=@report_params[:end_date]%></h1>
+<h1>Звіт за період: <%= @report.start_date %> - <%= @report.end_date %></h1>
+<h2><%=@report.otype_name %></h2>
+<%= @report.category_groups %>
+Total = <%= @report.total %>
+
 
