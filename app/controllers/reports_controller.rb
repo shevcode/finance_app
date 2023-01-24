@@ -19,13 +19,7 @@ class ReportsController < ApplicationController
   def report_by_category
     @report = ReportByCategory.new(@report_params)
     if @report.valid?
-      @report.category_groups = 
-        Operation
-          .joins(:category)
-          .where(otype: @report.otype_id, odate: @report.start_date..@report.end_date)
-          .group(:name)
-          .sum(:amount)
-          
+      @report.category_groups = Operation.joins(:category).where(otype: @report.otype_id, odate: @report.start_date..@report.end_date).group(:name).sum(:amount)
       @report.total = @report.category_groups.sum { |_, a| a }  
       @report.otype_name = Otype.find(@report.otype_id).title
       render :report_by_category
