@@ -1,14 +1,25 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Operations</h1>
-
-<div id="operations">
-  <% @operations.each do |operation| %>
-    <%= render operation %>
-    <p>
-      <%= link_to "Show this operation", operation %>
-    </p>
-  <% end %>
-</div>
+<h1>Операції</h1>
+<%=link_to "Додати нову операцію", new_operation_path, class: "btn btn-primary", role: "button" %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Категорія</th>
+      <th scope="col">Тип</th>
+      <th scope="col">Сума</th>
+      <th scope="col">Дата</th>
+      <th scope="col">Опис</th>
+      <th scope="col">Управління</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @operations.each do |operation| %>
+      <%= render operation %>
+    <% end %>
+  </tbody>
+</table>
 <%= paginate @operations %>
-<%= link_to "New operation", new_operation_path %>
+
+
