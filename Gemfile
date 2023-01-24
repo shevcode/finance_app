@@ -72,3 +72,5 @@ group :test do
 end
 
 gem "faker", "~> 3.1"
+
+gem "kaminari", "~> 1.2"
