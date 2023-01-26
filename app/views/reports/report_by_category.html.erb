@@ -1,52 +1,53 @@
 <h1>Звіт за період: <%= @report.start_date %> - <%= @report.end_date %></h1>
 <h2><%=@report.otype_name %></h2>
-<hr>
-<div class="container">
-  <div class="row">
-    <div class="col">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Категорія</th>
-                    <th scope="col">Сума</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% @report.category_groups.each do |name, amount| %>
+    <div class="row row-cols-1 row-cols-md-2 mb-3 text-center">
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-body">
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                    <td><%= name %></td>
-                    <td><%= amount.round(2) %></td>
+                        <th scope="col">Категорія</th>
+                        <th scope="col">Сума</th>
                     </tr>
-                <% end %>
-                <tr>
-                    <td colspan="2"><strong>Всього: <%= @report.total %> грн</strong></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="col">
-        <div>
-            <canvas id="reportByCategory"></canvas>
+                </thead>
+                <tbody>
+                    <% @report.category_groups.each do |name, amount| %>
+                        <tr>
+                        <td><%= name %></td>
+                        <td><%= amount.round(2) %></td>
+                        </tr>
+                    <% end %>
+                    <tr>
+                        <td colspan="2"><strong>Всього: <%= @report.total %> грн</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
-            const ctx = document.getElementById('reportByCategory');
-              
-            new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: <%= raw @report.category_groups.keys %>,
-                datasets: [{
-                label: 'Витрати за категоріями',
-                data: <%= @report.category_groups.values %>
-                }]
-            }
-            });
-        </script>
+      </div>
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-body">
+            <div>
+                <canvas id="reportByCategory"></canvas>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                const ctx = document.getElementById('reportByCategory');
+                  
+                new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: <%= raw @report.category_groups.keys %>,
+                    datasets: [{
+                    label: 'Витрати за категоріями',
+                    data: <%= @report.category_groups.values %>
+                    }]
+                }
+                });
+            </script>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-
-
-
-
