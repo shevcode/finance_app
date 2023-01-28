@@ -1,10 +1,25 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @category %>
+<div class="container">
+  <div class="row">
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+      <h1 class="display-4 fw-normal"><%= @category.name %></h1>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Назва</th>
+          <th scope="col">Опис</th>
+          <th scope="col">Управління</th>
+        </tr>
+      </thead>
+      <tbody>
+          <%= render @category %>
+      </tbody>
+    </table>
+  </div>
 
-<div>
-  <%= link_to "Edit this category", edit_category_path(@category) %> |
-  <%= link_to "Back to categories", categories_path %>
-
-  <%= button_to "Destroy this category", @category, method: :delete %>
 </div>

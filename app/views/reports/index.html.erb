@@ -11,19 +11,32 @@
         </div>
     <% end %>
 
-    <%= form.label :start_date, "Дата YYYY-MM-DD" %>     <%#Validation between two date rails https://stackoverflow.com/questions/47276147/validation-between-two-date-rails%>
-    <%= form.date_field :start_date %>
-    <br>
-    <%= form.label :end_date, "Дата YYYY-MM-DD" %>
-    <%= form.date_field :end_date %>
-    <br>
-    <%= form.label :category, "Тип операції" %>
-    <%= form.collection_select :otype_id, Otype.order(:title), :id, :title %>
-    <br>
-    <%= form.label :category, "Категорія" %>
-    <%= form.collection_select :category_id, Category.order(:name), :id, :name %>
-    <br>
-    <%= form.submit "Очистити", :type => "reset" %>
-    <%= form.submit "Графік",  formaction: 'report_by_category' %> 
-    <%= form.submit "По датам",  formaction: 'report_by_dates' %> 
+    <div class="mb-3">
+        <%= form.label :start_date, "Початок", class: "form-label" %>     <%#Validation between two date rails https://stackoverflow.com/questions/47276147/validation-between-two-date-rails%>
+        <%= form.date_field :start_date, class: "form-control" %>
+        <div id="DateStartHelp" class="form-text">Дата у форматі YYYY-MM-DD</div>
+    </div>
+    <div class="mb-3">
+        <%= form.label :end_date, "Кінець", class: "form-label" %>
+        <%= form.date_field :end_date, class: "form-control" %>
+        <div id="DateEndHelp" class="form-text">Дата у форматі YYYY-MM-DD</div>
+    </div>
+    <div class="mb-3">
+        <%= form.label :category, "Тип операції", class: "form-label" %>
+        <%= form.collection_select :otype_id, Otype.order(:title), :id, :title, {}, {:class=>'form-select'} %>
+    </div>
+    <div class="mb-3">
+        <%= form.label :category, "Категорія", class: "form-label" %>
+        <%= form.collection_select :category_id, Category.order(:name), :id, :name, {}, {:class=>'form-select'} %>
+    </div>
+    <div class="mb-3">
+        <%= form.submit "Очистити", :type => "reset", class: 'btn btn-secondary' %>
+        <%= button_tag type: 'submit', formaction: 'report_by_category', class: "btn btn-primary" do %>
+            <i class="bi bi-pie-chart"></i> Графік 
+        <% end %> 
+        <%= button_tag type: 'submit', formaction: 'report_by_dates', class: "btn btn-primary" do %>
+            <i class="bi bi-calendar-date"></i> По датам 
+        <% end %> 
+
+    </div>
 <% end %>

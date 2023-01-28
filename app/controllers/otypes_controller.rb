@@ -3,7 +3,7 @@ class OtypesController < ApplicationController
 
   # GET /otypes or /otypes.json
   def index
-    @otypes = Otype.all
+    @otypes = Otype.page(params[:page])
   end
 
   # GET /otypes/1 or /otypes/1.json

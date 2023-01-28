@@ -1,8 +1,7 @@
 <%= form_with(model: category) do |form| %>
   <% if category.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
-
+      <h2><%= pluralize(category.errors.count, "error") %> prohibited this operation from being saved:</h2>
       <ul>
         <% category.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,17 +10,18 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="mb-3">
+    <%= form.label "Назва", style: "display: block", class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label "Опис", style: "display: block", class: "form-label" %>
+    <%= form.text_field :description, class: "form-control" %>
+    <div id="descriptionHelp" class="form-text">Короткий опис категорії</div>
   </div>
 
   <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit :class => 'btn btn-primary' %>
   </div>
 <% end %>

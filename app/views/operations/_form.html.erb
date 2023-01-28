@@ -2,7 +2,6 @@
   <% if operation.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(operation.errors.count, "error") %> prohibited this operation from being saved:</h2>
-
       <ul>
         <% operation.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,34 +10,34 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :amount, style: "display: block" %>
-    <%= form.number_field :amount, value: number_to_currency(form.object.amount.to_f, delimiter: '', unit: ''), step: :any %>
+  <div class="mb-3">
+    <%= form.label "Сума", style: "display: block", class: "form-label" %>
+    <%= form.number_field :amount, value: number_to_currency(form.object.amount.to_f, delimiter: '', unit: ''), step: :any, class: "form-control" %>
+    <div id="amountHelp" class="form-text"></div>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label "Дата", style: "display: block", class: "form-label" %>
+    <%= form.datetime_field :odate, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label "Опис", style: "display: block", class: "form-label" %>
+    <%= form.text_field :description, class: "form-control" %>
+    <div id="descriptionHelp" class="form-text">Короткий опис транзакції</div>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label "Тип транзакції", style: "display: block", class: "form-label" %>
+    <%= form.collection_select :otype_id, Otype.order(:title), :id, :title, {}, {:class=>'form-select'} %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label "Категорія", style: "display: block", class: "form-label" %>
+    <%= form.collection_select :category_id, Category.order(:name), :id, :name, {}, {:class=>'form-select'} %>
   </div>
 
   <div>
-    <%= form.label :odate, style: "display: block" %>
-    <%= form.datetime_field :odate %>
-  </div>
-
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
-  </div>
-
-  <div>
-    <%= form.label :otype_id, style: "display: block" %>
-    <%= form.collection_select :otype_id, Otype.order(:title), :id, :title %>
-  </div>
-
-  <div>
-    <%= form.label :category_id, style: "display: block" %>
-    <%= form.collection_select :category_id, Category.order(:name), :id, :name %>
-  </div>
-
-  
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit :class => 'btn btn-primary' %>
   </div>
 <% end %>
