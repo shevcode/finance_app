@@ -25,7 +25,7 @@ class OtypesController < ApplicationController
 
     respond_to do |format|
       if @otype.save
-        format.html { redirect_to otype_url(@otype), notice: "Otype was successfully created." }
+        format.html { redirect_to otype_url(@otype), notice: "Тип транзакцій успішно створено." }
         format.json { render :show, status: :created, location: @otype }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class OtypesController < ApplicationController
   def update
     respond_to do |format|
       if @otype.update(otype_params)
-        format.html { redirect_to otype_url(@otype), notice: "Otype was successfully updated." }
+        format.html { redirect_to otype_url(@otype), notice: "Тип транзакцій успішно оновлено." }
         format.json { render :show, status: :ok, location: @otype }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class OtypesController < ApplicationController
     @otype.destroy
 
     respond_to do |format|
-      format.html { redirect_to otypes_url, notice: "Otype was successfully destroyed." }
+      format.html { redirect_to otypes_url, notice: "Тип транзакцій успішно видалено." }
       format.json { head :no_content }
     end
   end

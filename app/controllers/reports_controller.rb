@@ -3,7 +3,8 @@ class ReportsController < ApplicationController
   class Report
     include ActiveModel::Model
     attr_accessor :start_date, :end_date, :otype_name, :otype_id, :category_id, :category_name, :category_groups, :total
-    validates :start_date, :end_date, presence: true #TODO check: 1)second date > first date  2)at least one date is not blank
+    validates :start_date, :end_date, presence: true 
+    validates :end_date, comparison: { greater_than: :start_date, message: 'must be greater than start date' }
   end
   class ReportByCategory < Report
     validates :otype_id, presence: true
@@ -22,9 +23,16 @@ class ReportsController < ApplicationController
       @report.category_groups = Operation.joins(:category).where(otype: @report.otype_id, odate: @report.start_date..@report.end_date).group(:name).sum(:amount)
       @report.total = @report.category_groups.sum { |_, a| a }.round(2)  
       @report.otype_name = Otype.find(@report.otype_id).title
-      render :report_by_category
+      respond_to do |format|
+        format.html { render :report_by_category }
+        format.json { render :show, status: :ok } #TODO correct JSON response
+      end  
     else
-      render :index, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :index, status: :unprocessable_entity }
+        format.json { render json: @report.errors, status: :unprocessable_entity } 
+      end 
+
     end
   end
 
@@ -45,6 +53,6 @@ class ReportsController < ApplicationController
 
   private
   def set_report
-    @report_params = params.permit(:start_date, :end_date, :otype_id, :category_id, :commit).except(:commit)
+    @report_params = params.permit(:start_date, :end_date, :otype_id, :category_id, :button).except(:button)
   end
 end
