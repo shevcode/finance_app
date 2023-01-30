@@ -14,12 +14,12 @@
     <div class="mb-3">
         <%= form.label :start_date, "Початок", class: "form-label" %>     <%#Validation between two date rails https://stackoverflow.com/questions/47276147/validation-between-two-date-rails%>
         <%= form.date_field :start_date, class: "form-control" %>
-        <div id="DateStartHelp" class="form-text">Дата у форматі YYYY-MM-DD</div>
+        <div id="DateStartHelp" class="form-text">Початкова дата для звіту</div>
     </div>
     <div class="mb-3">
         <%= form.label :end_date, "Кінець", class: "form-label" %>
         <%= form.date_field :end_date, class: "form-control" %>
-        <div id="DateEndHelp" class="form-text">Дата у форматі YYYY-MM-DD</div>
+        <div id="DateEndHelp" class="form-text">Кінцева дата для звіту</div>
     </div>
     <div class="mb-3">
         <%= form.label :category, "Тип операції", class: "form-label" %>

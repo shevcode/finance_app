@@ -4,7 +4,8 @@ class ReportsController < ApplicationController
     include ActiveModel::Model
     attr_accessor :start_date, :end_date, :otype_name, :otype_id, :category_id, :category_name, :category_groups, :total
     validates :start_date, :end_date, presence: true 
-    validates :end_date, comparison: { greater_than: :start_date, message: 'must be greater than start date' }
+    validates :start_date, :end_date, format: { with: /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/, message: "should be in format YYYY-MM-DD" }
+    validates :end_date, comparison: { greater_than_or_equal_to: :start_date, message: 'must be greater than or equal to start date' }
   end
   class ReportByCategory < Report
     validates :otype_id, presence: true
@@ -29,6 +30,7 @@ class ReportsController < ApplicationController
       end  
     else
       respond_to do |format|
+        #p request.headers["HTTP_ACCEPT"]
         format.html { render :index, status: :unprocessable_entity }
         format.json { render json: @report.errors, status: :unprocessable_entity } 
       end 
