@@ -18,7 +18,7 @@
     </div>
     <div class="mb-3">
         <%= form.label :end_date, class: "form-label" %>
-        <%= form.date_field :end_date, class: "form-control" %>
+        <%= form.date_field :end_date, value: Date.today, max: Date.today, class: "form-control" %>
         <div id="DateEndHelp" class="form-text"><%= t('report_generator.end_date_help')%></div>
     </div>
     <div class="mb-3">

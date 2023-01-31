@@ -147,10 +147,13 @@ uk:
       reports_controller/report_by_category:
         start_date: "Початок"
         end_date: "Кінець"
+        otype_id: "Тип транзакцій"
+        category_id: "Категорія"
       reports_controller/report_by_dates:
         start_date: "Початок"
         end_date: "Кінець"
-        
+        otype_id: "Тип транзакцій"
+        category_id: "Категорія"
     errors:
       template:
         header:
