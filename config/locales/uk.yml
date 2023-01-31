@@ -111,7 +111,13 @@ uk:
     array:
       sentence_connector: "і"
       skip_last_comma: false
-    
+  views:
+    pagination:
+      first: "&laquo; Перша"
+      last: "Остання &raquo;"
+      next: "Наступна &rsaquo;"
+      previous: "&lsaquo; Попередня"
+      truncate: "&hellip;"  
   helpers:
     submit:
       create: "Нова %{model}"
@@ -119,6 +125,16 @@ uk:
     label:
       start_date: "Початок"
       end_date: "Кінець"
+    page_entries_info:
+      more_pages:
+        display_entries: "Відображено %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> із <b>%{total}</b>"
+      one_page:
+        display_entries:
+          few: "Відображені <b>%{count}</b> %{entry_name}"
+          many: "Відображені <b>%{count}</b> %{entry_name}"
+          one: "Відображено <b>%{count}</b> %{entry_name}"
+          other: "Відображені <b>всі %{count}</b> %{entry_name}"
+          zero: "Жодного %{entry_name}"
   activemodel:
     models:
       reports_controller/report_by_category:
@@ -155,7 +171,7 @@ uk:
         not_a_number: "не є числом"
         not_a_date: "є недійсною датою"
         greater_than: "значення має бути більшим ніж %{count}"
-        greater_than_or_equal_to: "значення має бути більшим або дорівнювати %{count}"
+        greater_than_or_equal_to: "значення має бути більшим або дорівнювати початковому значенню"
         equal_to: "значення має дорівнювати %{count}"
         less_than: "значення має бути меншим ніж %{count}"
         less_than_or_equal_to: "значення має бути меншим або дорівнювати %{count}"
