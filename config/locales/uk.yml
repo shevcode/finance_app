@@ -116,6 +116,58 @@ uk:
     submit:
       create: "Нова %{model}"
       update: "Оновити"
+    label:
+      start_date: "Початок"
+      end_date: "Кінець"
+  activemodel:
+    models:
+      reports_controller/report_by_category:
+        one: "Звіт за категоріями"
+        other: "Звіти за категоріями"
+      reports_controller/report_by_dates:
+        one: "Звіт по датам"
+        other: "Звіти по датам"
+    attributes:
+      reports_controller/report_by_category:
+        start_date: "Початок"
+        end_date: "Кінець"
+      reports_controller/report_by_dates:
+        start_date: "Початок"
+        end_date: "Кінець"
+        
+    errors:
+      template:
+        header:
+          one:    "1 помилка не дозволяє створити %{model}"
+          other:  "%{count} помилок не дозволяють створити %{model}"
+      messages:
+        inclusion: "немає в списку"
+        exclusion: "зарезервовано"
+        invalid: "невірне"
+        confirmation: "не збігається з підтвердженням"
+        accepted: "необхідно прийняти"
+        empty: "не може бути порожнім"
+        blank: "не може бути незаповненим"
+        too_long: "дуже довге"
+        too_short: "дуже коротке"
+        wrong_length: "не відповідає довжині"
+        taken: "вже використовується"
+        not_a_number: "не є числом"
+        not_a_date: "є недійсною датою"
+        greater_than: "значення має бути більшим ніж %{count}"
+        greater_than_or_equal_to: "значення має бути більшим або дорівнювати %{count}"
+        equal_to: "значення має дорівнювати %{count}"
+        less_than: "значення має бути меншим ніж %{count}"
+        less_than_or_equal_to: "значення має бути меншим або дорівнювати %{count}"
+        odd: "може мати тільки непарне значення"
+        even: "може мати тільки парне значення"
+        greater_than_start_date: "повинна бути пізніша за дату початку"
+        not_same_project: "не відносяться до одного проекту"
+        circular_dependency: "Такий зв'язок приведе до циклічної залежності"
+        cant_link_an_issue_with_a_descendant: "Задача не може бути зв'язана зі своїми підзадачами"
+        earlier_than_minimum_start_date: "не може бути раніше ніж %{date} через попередні задачі"
+
+    
   activerecord:
     models:
       operation:
@@ -133,6 +185,12 @@ uk:
         odate: "Дата"
         description: "Опис"
         description_help: "Короткий опис транзакції"
+      category:
+        name: "Назва"
+        description: "Опис"
+        description_help: "Короткий опис категорії"
+      otype:
+        title: "Назва"
     errors:
       template:
         header:
@@ -1227,3 +1285,11 @@ uk:
   label_new_object_tab_enabled: Відображати випадаючий список "+"
   error_no_projects_with_tracker_allowed_for_new_issue: Немає проектів з трекерами, для яких можна було б створити задачу
   error_cannot_reassign_time_entries_to_an_issue_about_to_be_deleted: Витрачений час не можна перенести на задачу, яка має бути видалена
+
+  report_generator:
+    title: "Генератор звітів"
+    start_date_help: "Початкова дата для звіту"
+    end_date_help: "Кінцева дата для звіту"
+    button_reset: "Очистити"
+    button_by_categories: "Графік"
+    button_by_dates: "По датам"

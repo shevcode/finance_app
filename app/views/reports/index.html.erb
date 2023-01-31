@@ -1,8 +1,8 @@
-<h1>Генератор звітів</h1>
+<h1><%= t('report_generator.title') %></h1>
 <%= form_with method: :get do |form| %>
     <% if @report.present? && @report.errors.any? %>
         <div style="color: red">
-        <h2><%= pluralize(@report.errors.count, "error") %> prohibited this report from being sent:</h2>
+        <h2><%= t('activemodel.errors.template.header', :model => @report.model_name.human, :count => @report.errors.count) %></h2>
         <ul>
             <% @report.errors.each do |error| %>
             <li><%= error.full_message %></li>
@@ -12,30 +12,30 @@
     <% end %>
 
     <div class="mb-3">
-        <%= form.label :start_date, "Початок", class: "form-label" %> 
+        <%= form.label :start_date, class: "form-label" %> 
         <%= form.date_field :start_date, class: "form-control" %>
-        <div id="DateStartHelp" class="form-text">Початкова дата для звіту</div>
+        <div id="DateStartHelp" class="form-text"><%= t('report_generator.start_date_help')%></div>
     </div>
     <div class="mb-3">
-        <%= form.label :end_date, "Кінець", class: "form-label" %>
+        <%= form.label :end_date, class: "form-label" %>
         <%= form.date_field :end_date, class: "form-control" %>
-        <div id="DateEndHelp" class="form-text">Кінцева дата для звіту</div>
+        <div id="DateEndHelp" class="form-text"><%= t('report_generator.end_date_help')%></div>
     </div>
     <div class="mb-3">
-        <%= form.label :category, "Тип операції", class: "form-label" %>
+        <%= form.label Otype.model_name.human, class: "form-label" %>
         <%= form.collection_select :otype_id, Otype.order(:title), :id, :title, {}, {:class=>'form-select'} %>
     </div>
     <div class="mb-3">
-        <%= form.label :category, "Категорія", class: "form-label" %>
+        <%= form.label Category.model_name.human, class: "form-label" %>
         <%= form.collection_select :category_id, Category.order(:name), :id, :name, {}, {:class=>'form-select'} %>
     </div>
     <div class="mb-3">
-        <%= form.submit "Очистити", :type => "reset", class: 'btn btn-secondary' %>
+        <%= form.submit t('report_generator.button_reset'), :type => "reset", class: 'btn btn-secondary' %>
         <%= button_tag type: 'submit', formaction: 'report_by_category', class: "btn btn-primary" do %>
-            <i class="bi bi-pie-chart"></i> Графік 
+            <i class="bi bi-pie-chart"></i> <%= t('report_generator.button_by_categories') %>
         <% end %> 
         <%= button_tag type: 'submit', formaction: 'report_by_dates', class: "btn btn-primary" do %>
-            <i class="bi bi-calendar-date"></i> По датам 
+            <i class="bi bi-calendar-date"></i> <%= t('report_generator.button_by_dates') %>
         <% end %> 
 
     </div>

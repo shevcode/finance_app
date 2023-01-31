@@ -1,10 +1,9 @@
-<h1>Редагування типу операції</h1>
-
+<h1><%= t('button_edit') + ' ' + Otype.model_name.human %></h1>
 <%= render "form", otype: @otype %>
 
 <br>
 
 <div>
-  <%= link_to "Показати цей тип операцій", @otype %> |
-  <%= link_to "Усі типи операцій", otypes_path %>
+  <%= link_to Otype.model_name.human + ' ' + @otype.title, @otype %> |
+  <%= link_to t('label_all') + ' ' + Otype.model_name.human(:count => 2), otypes_path %>
 </div>

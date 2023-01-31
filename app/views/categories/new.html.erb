@@ -1,9 +1,8 @@
-<h1>Нова категорія</h1>
-
+<h1><%= t('helpers.submit.create', :model => Category.model_name.human) %></h1>
 <%= render "form", category: @category %>
 
 <br>
 
 <div>
-  <%= link_to "Усі категорії", categories_path %>
+  <%= link_to t('label_all') + ' ' + Category.model_name.human(:count => 2), categories_path %>
 </div>

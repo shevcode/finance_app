@@ -1,5 +1,5 @@
 <p style="color: green"><%= notice %></p>
-<h1>Звіт за період: <%= @report.start_date %> - <%= @report.end_date %></h1>
+<h1><%= @report.model_name.human %>: <%= @report.start_date %> - <%= @report.end_date %></h1>
 <h2><%=@report.otype_name %></h2>
     <div class="row row-cols-1 row-cols-md-2 mb-3 text-center">
       <div class="col">
@@ -8,8 +8,8 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Категорія</th>
-                        <th scope="col">Сума</th>
+                        <th scope="col"><%= Category.model_name.human %></th>
+                        <th scope="col"><%= t('activerecord.attributes.operation.amount') %></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,7 +20,7 @@
                         </tr>
                     <% end %>
                     <tr>
-                        <td colspan="2"><strong>Всього: <%= @report.total %> грн</strong></td>
+                        <td colspan="2"><strong><%= t('label_total') %>: <%= @report.total %> </strong></td>
                     </tr>
                 </tbody>
             </table>
@@ -42,7 +42,7 @@
                 data: {
                     labels: <%= raw @report.category_groups.keys %>,
                     datasets: [{
-                    label: 'Витрати за категоріями',
+                    label: '<%= @report.model_name.human %>',
                     data: <%= @report.category_groups.values %>
                     }]
                 }

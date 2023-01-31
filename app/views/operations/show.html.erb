@@ -11,12 +11,12 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Категорія</th>
-          <th scope="col">Тип</th>
-          <th scope="col">Сума</th>
-          <th scope="col">Дата</th>
-          <th scope="col">Опис</th>
-          <th scope="col">Управління</th>
+          <th scope="col"><%= Category.model_name.human %></th>
+          <th scope="col"><%= Otype.model_name.human %></th>
+          <th scope="col"><%= t('activerecord.attributes.operation.amount') %></th>
+          <th scope="col"><%= t('activerecord.attributes.operation.odate') %></th>
+          <th scope="col"><%= t('activerecord.attributes.operation.description') %></th>
+          <th scope="col"><%= t('button_configure') %></th>
         </tr>
       </thead>
       <tbody>

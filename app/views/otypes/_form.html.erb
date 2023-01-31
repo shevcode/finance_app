@@ -1,7 +1,7 @@
 <%= form_with(model: otype) do |form| %>
   <% if otype.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(otype.errors.count, "error") %> prohibited this operation from being saved:</h2>
+      <h2><%= t('activerecord.errors.template.header', :model => Otype.model_name.human, :count => @otype.errors.count) %></h2>
       <ul>
         <% otype.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,11 +11,11 @@
   <% end %>
 
   <div class="mb-3">
-    <%= form.label "Назва", style: "display: block", class: "form-label" %>
+    <%= form.label :title, style: "display: block", class: "form-label" %>
     <%= form.text_field :title, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.submit :class => 'btn btn-primary' %>
+    <%= form.submit class: 'btn btn-primary' %>
   </div>
 <% end %>

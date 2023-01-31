@@ -3,12 +3,12 @@
 <div class="container">
   <div class="row">
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-      <h1 class="display-4 fw-normal">Категорії</h1>
+      <h1 class="display-4 fw-normal"><%= Category.model_name.human(:count => 2) %></h1>
     </div>
   </div>
   <div class="row">
     <div class="p-3 pb-md-4 mx-auto ">
-      <%= link_to " Додати категорію", new_category_path, class: "btn btn-success bi bi-plus-square", role: "button", alt: "Add new"  %>
+      <%= link_to ' ' + t('helpers.submit.create', :model => Category.model_name.human), new_category_path, class: "btn btn-success bi bi-plus-square", role: "button", alt: "Add new"  %>
     </div>
   </div>
   <div class="row">
@@ -16,9 +16,9 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Назва</th>
-          <th scope="col">Опис</th>
-          <th scope="col">Управління</th>
+          <th scope="col"><%= t('activerecord.attributes.category.name') %></th>
+          <th scope="col"><%= t('activerecord.attributes.category.description') %></th>
+          <th scope="col"><%= t('button_configure') %></th>
         </tr>
       </thead>
       <tbody>

@@ -1,9 +1,9 @@
-<h1>Новий тип операцій</h1>
+<h1><%= t('button_add') + ' ' + Otype.model_name.human %></h1>
 
 <%= render "form", otype: @otype %>
 
 <br>
 
 <div>
-  <%= link_to "Усі типи операцій", otypes_path %>
+  <%= link_to t('label_all') + ' ' + Category.model_name.human(:count => 2), categories_path %>
 </div>

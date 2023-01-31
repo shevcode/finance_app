@@ -1,10 +1,10 @@
-<h1>Редагування категорії</h1>
+<h1><%=Category.model_name.human + ' / ' + t('button_edit') %></h1>
 
 <%= render "form", category: @category %>
 
 <br>
 
 <div>
-  <%= link_to "Показати цю категорію", @category %> |
-  <%= link_to "Усі категорії", categories_path %>
+  <%= link_to Category.model_name.human + ' ' + @category.description, @category %> |
+  <%= link_to t('label_all') + ' ' + Category.model_name.human(:count => 2), categories_path %>
 </div>
