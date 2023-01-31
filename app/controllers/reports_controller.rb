@@ -42,8 +42,13 @@ class ReportsController < ApplicationController
     @report = ReportByDates.new(@report_params)
     if @report.valid?
       @report.otype_name = Otype.find(@report.otype_id).title
-      @report.category_name = Category.find(@report.category_id).name
-      selected_operations = Operation.select(:id, :amount, :odate, :description).where(category: @report.category_id, otype: @report.otype_id, odate: @report.start_date..@report.end_date).order(:odate)
+      unless @report.category_id == 'all'
+        @report.category_name = Category.find(@report.category_id).name
+        selected_operations = Operation.select(:id, :amount, :odate, :description).where(category: @report.category_id, otype: @report.otype_id, odate: @report.start_date..@report.end_date).order(:odate)
+      else
+        @report.category_name = t('label_all') + ' ' + Category.model_name.human(:count => 2)
+        selected_operations = Operation.select(:id, :amount, :odate, :description).where(otype: @report.otype_id, odate: @report.start_date..@report.end_date).order(:odate)
+      end
       operations_data = selected_operations.map { |o| [o.odate.to_s, o.amount] }
       @dates = operations_data.map { |o| o[0] }
       @amounts = operations_data.map { |o| o[1] }
