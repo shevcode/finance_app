@@ -1,13 +1,36 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  amount: 9.99
-  odate: 2023-01-11 16:50:58
-  description: MyString
+  amount: 32.99
+  odate: 2022-01-01 16:50:58
+  description: Apple
   category: one
+  otype: one
 
 two:
+  amount: 9.34
+  odate: 2022-04-11 16:50:58
+  description: Jeans
+  category: two
+  otype: two
+
+three:
+  amount: 53.99
+  odate: 2022-08-01 16:50:58
+  description: 129 gallons of diesel
+  category: three
+  otype: one
+
+four:
   amount: 9.99
   odate: 2023-01-11 16:50:58
-  description: MyString
-  category: two
+  description: luxury ring
+  category: four
+  otype: two
+
+five:
+  amount: 36.99
+  odate: 2023-01-02 16:50:58
+  description: Coat
+  category: seven
+  otype: two

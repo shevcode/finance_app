@@ -26,12 +26,14 @@ class ReportsController < ApplicationController
       @report.total = @report.category_groups.sum { |_, a| a }.round(2)  
       @report.otype_name = Otype.find(@report.otype_id).title
       respond_to do |format|
-        format.html { render :report_by_category }
+        format.html {
+          flash[:notice] = @report.model_name.human + ": "+ I18n.t('notice_successful_create')           
+          render :report_by_category
+          }
         format.json { render :show, status: :ok } #TODO correct JSON response
       end  
     else
       respond_to do |format|
-        #p request.headers["HTTP_ACCEPT"]
         format.html { render :index, status: :unprocessable_entity }
         format.json { render json: @report.errors, status: :unprocessable_entity } 
       end 
@@ -53,9 +55,18 @@ class ReportsController < ApplicationController
       operations_data = selected_operations.map { |o| [o.odate.to_s, o.amount] }
       @dates = operations_data.map { |o| o[0] }
       @amounts = operations_data.map { |o| o[1] }
-      render :report_by_dates
+      respond_to do |format|
+        format.html {
+          flash[:notice] = @report.model_name.human + ": "+ I18n.t('notice_successful_create')           
+          render :report_by_dates
+          }
+        format.json { render :show, status: :ok } #TODO correct JSON response
+      end  
     else
-      render :index, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :index, status: :unprocessable_entity }
+        format.json { render json: @report.errors, status: :unprocessable_entity } 
+      end
     end
   end
 
