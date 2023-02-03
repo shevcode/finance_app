@@ -47,14 +47,14 @@ class ReportsController < ApplicationController
       @report.otype_name = Otype.find(@report.otype_id).title
       unless @report.category_id == 'all'
         @report.category_name = Category.find(@report.category_id).name
-        selected_operations = Operation.select(:id, :amount, :odate, :description).where(category: @report.category_id, otype: @report.otype_id, odate: @report.start_date..@report.end_date).order(:odate)
+        operation_sums = Operation.where(category: @report.category_id, otype: @report.otype_id, odate: @report.start_date..@report.end_date).group(:odate).sum(:amount)
       else
         @report.category_name = t('label_all') + ' ' + Category.model_name.human(:count => 2)
-        selected_operations = Operation.select(:id, :amount, :odate, :description).where(otype: @report.otype_id, odate: @report.start_date..@report.end_date).order(:odate)
+        operation_sums = Operation.where(otype: @report.otype_id, odate: @report.start_date..@report.end_date).group(:odate).sum(:amount)
       end
-      operations_data = selected_operations.map { |o| [o.odate.to_s, o.amount] }
-      @dates = operations_data.map { |o| o[0] }
-      @amounts = operations_data.map { |o| o[1] }
+      
+      @dates = operation_sums.keys.map { |date| date.strftime("%F") }
+      @amounts = operation_sums.values 
       respond_to do |format|
         format.html {
           flash[:notice] = @report.model_name.human + ": "+ I18n.t('notice_successful_create')           

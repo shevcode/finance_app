@@ -31,10 +31,10 @@
     </div>
     <div class="mb-3">
         <%= form.submit t('report_generator.button_reset'), :type => "reset", class: 'btn btn-secondary' %>
-        <%= button_tag type: 'submit', formaction: 'report_by_category', class: "btn btn-primary" do %>
+        <%= button_tag type: 'submit', formaction: reports_report_by_category_path, class: "btn btn-primary" do %>
             <i class="bi bi-pie-chart"></i> <%= t('report_generator.button_by_categories') %>
         <% end %> 
-        <%= button_tag type: 'submit', formaction: 'report_by_dates', class: "btn btn-primary" do %>
+        <%= button_tag type: 'submit', formaction: reports_report_by_dates_path, class: "btn btn-primary" do %>
             <i class="bi bi-calendar-date"></i> <%= t('report_generator.button_by_dates') %>
         <% end %> 
 
