@@ -137,19 +137,11 @@ uk:
           zero: "Жодного %{entry_name}"
   activemodel:
     models:
-      reports_controller/report_by_category:
-        one: "Звіт за категоріями"
-        other: "Звіти за категоріями"
-      reports_controller/report_by_dates:
-        one: "Звіт по датам"
-        other: "Звіти по датам"
+      reports_controller/report:
+        one: "Звіт"
+        other: "Звіти"
     attributes:
-      reports_controller/report_by_category:
-        start_date: "Початок"
-        end_date: "Кінець"
-        otype_id: "Тип транзакцій"
-        category_id: "Категорія"
-      reports_controller/report_by_dates:
+      reports_controller/report:
         start_date: "Початок"
         end_date: "Кінець"
         otype_id: "Тип транзакцій"

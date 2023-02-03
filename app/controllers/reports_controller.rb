@@ -3,16 +3,9 @@ class ReportsController < ApplicationController
   class Report
     include ActiveModel::Model
     attr_accessor :start_date, :end_date, :otype_name, :otype_id, :category_id, :category_name, :category_groups, :total
-    validates :start_date, :end_date, presence: true 
+    validates :start_date, :end_date, :otype_id, presence: true 
     validates :start_date, :end_date, format: { with: /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/ }
-    validates :otype_id, :category_id, format: { with: /\d{1,3}|all/ }
     validates :end_date, comparison: { greater_than_or_equal_to: :start_date }
-  end
-  class ReportByCategory < Report
-    validates :otype_id, presence: true
-  end
-  class ReportByDates < Report
-    validates :otype_id, :category_id, presence: true
   end
 
   def index
@@ -20,9 +13,9 @@ class ReportsController < ApplicationController
   end
 
   def report_by_category
-    @report = ReportByCategory.new(@report_params)
+    @report = Report.new(@report_params)
     if @report.valid?
-      @report.category_groups = Operation.joins(:category).where(otype: @report.otype_id, odate: @report.start_date..@report.end_date).group(:name).sum(:amount)
+      @report.category_groups = Operation.joins(:category).between_dates(@report.start_date, @report.end_date).type_is(@report.otype_id).group(:name).sum(:amount)
       @report.total = @report.category_groups.sum { |_, a| a }.round(2)  
       @report.otype_name = Otype.find(@report.otype_id).title
       respond_to do |format|
@@ -42,17 +35,15 @@ class ReportsController < ApplicationController
   end
 
   def report_by_dates
-    @report = ReportByDates.new(@report_params)
+    @report = Report.new(@report_params)
     if @report.valid?
       @report.otype_name = Otype.find(@report.otype_id).title
-      unless @report.category_id == 'all'
+      if @report.category_id.present?
         @report.category_name = Category.find(@report.category_id).name
-        operation_sums = Operation.where(category: @report.category_id, otype: @report.otype_id, odate: @report.start_date..@report.end_date).group(:odate).sum(:amount)
       else
         @report.category_name = t('label_all') + ' ' + Category.model_name.human(:count => 2)
-        operation_sums = Operation.where(otype: @report.otype_id, odate: @report.start_date..@report.end_date).group(:odate).sum(:amount)
       end
-      
+      operation_sums = Operation.between_dates(@report.start_date, @report.end_date).category_is(@report.category_id).type_is(@report.otype_id).group(:odate).sum(:amount)
       @dates = operation_sums.keys.map { |date| date.strftime("%F") }
       @amounts = operation_sums.values 
       respond_to do |format|

@@ -27,7 +27,7 @@
     </div>
     <div class="mb-3">
         <%= form.label Category.model_name.human, class: "form-label" %>
-         <%= form.select :category_id, Category.all.collect { |p| [ p.name, p.id ] }.unshift([t('label_all'), 'all']) , {}, { :class => 'form-select' } %>
+         <%= form.select :category_id, Category.all.collect { |p| [ p.name, p.id ] }.unshift([t('label_all'), ""]) , {}, { :class => 'form-select' } %>
     </div>
     <div class="mb-3">
         <%= form.submit t('report_generator.button_reset'), :type => "reset", class: 'btn btn-secondary' %>
