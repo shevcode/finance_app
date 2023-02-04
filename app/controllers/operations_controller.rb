@@ -1,9 +1,14 @@
 class OperationsController < ApplicationController
   before_action :set_operation, only: %i[ show edit update destroy ]
+  before_action :collection_params, only: :index
 
   # GET /operations or /operations.json
   def index
-    @operations = Operation.page(params[:page]).order("odate DESC")
+    @operations = Operation
+    .category_is(collection_params[:category_id])
+    .type_is(collection_params[:otype_id])
+    .between_dates(collection_params[:start], collection_params[:end])
+    .page(params[:page]).order("odate DESC")
   end
 
   # GET /operations/1 or /operations/1.json
@@ -66,5 +71,9 @@ class OperationsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def operation_params
       params.require(:operation).permit(:amount, :odate, :description, :otype_id, :category_id)
+    end
+
+    def collection_params
+      params.permit(:start, :end, :otype_id, :category_id)
     end
 end

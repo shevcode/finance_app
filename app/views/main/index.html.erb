@@ -1,11 +1,27 @@
-<h1><%= t(:hello) %>, Username</h1>
-<p>Find me in app/views/main/index.html.erb</p>
-
-
-#TODO 
-
-<p>#User authorisation (gem)</p>
-
-<p>#Main page (for example: top  expences for last week, largest buy for month, trends etc...)</p>
-
-      
+<div class="row align-items-md-stretch mb-4">
+  <div class="col-md-6">
+    <div class="h-100 p-5 bg-light border rounded-3">
+      <h2 class="text-danger"><%= @expences_last_month %></h2>
+      <p>Ваші витрати за минулий місяць</p>
+      <a href="<%= operations_url %>?otype_id=2" class="btn btn-outline-primary" role="button">Усі витрати</a>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="h-100 p-5 bg-light border rounded-3">
+      <h2 class="text-success"><%= @profit_last_month %></h2>
+      <p>Ваші доходи за минулий місяць</p>
+      <a href="<%= operations_url %>?otype_id=1" class="btn btn-outline-primary" role="button">Усі доходи</a>
+    </div>
+  </div>
+</div>  
+<div class="p-5 mb-4 bg-light border rounded-3">
+  <div class="container-fluid py-5">
+    <h1 class="display-5 fw-bold">TOP 3 витрат за минулий місяць</h1>
+    <div class="col-md-10 fs-4">
+        <ol>
+            <%= render partial: "operation", collection: @top3ops %>
+        </ol>        
+    </div>
+    <a href="<%= operations_url %>" class="btn btn-lg btn-outline-primary mt-3" role="button">Усі операції</a>
+  </div>
+</div>
