@@ -3,14 +3,14 @@
     <div class="h-100 p-5 bg-light border rounded-3">
       <h2 class="text-danger"><%= @expences_last_month %></h2>
       <p>Ваші витрати за минулий місяць</p>
-      <a href="<%= operations_url %>?otype_id=2" class="btn btn-outline-primary" role="button">Усі витрати</a>
+      <a href="<%= operations_path(@operation, :otype_id => "2") %>" class="btn btn-outline-primary" role="button">Усі витрати</a>
     </div>
   </div>
   <div class="col-md-6">
     <div class="h-100 p-5 bg-light border rounded-3">
       <h2 class="text-success"><%= @profit_last_month %></h2>
       <p>Ваші доходи за минулий місяць</p>
-      <a href="<%= operations_url %>?otype_id=1" class="btn btn-outline-primary" role="button">Усі доходи</a>
+      <a href="<%= operations_path(@operation, :otype_id => "1") %>" class="btn btn-outline-primary" role="button">Усі витрати</a>
     </div>
   </div>
 </div>  
@@ -25,3 +25,4 @@
     <a href="<%= operations_url %>" class="btn btn-lg btn-outline-primary mt-3" role="button">Усі операції</a>
   </div>
 </div>
+
