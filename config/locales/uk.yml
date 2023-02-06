@@ -1304,3 +1304,9 @@ uk:
     button_reset: "Очистити"
     button_by_categories: "Графік"
     button_by_dates: "По датам"
+    expenses:
+      one: "Витрата"
+      other:  "Витрати"
+    profits:
+      one: "Дохід"
+      other: "Доходи"

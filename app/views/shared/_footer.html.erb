@@ -5,27 +5,34 @@
         <small class="d-block mb-3 text-muted">&copy; 2023</small>
       </div>
       <div class="col-6 col-md">
-        <h5>Features</h5>
+        <h5><%= Operation.model_name.human(:count => 2) %></h5>
         <ul class="list-unstyled text-small">
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Cool stuff</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Random feature</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team feature</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Stuff for developers</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another one</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Last time</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="<%= operations_url %>"> <%= t('label_all') %></a></li>   
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="<%= operations_path(@operation, :otype_id => "2") %>"><%= t('report_generator.expenses', :count => 2) %></a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="<%= operations_path(@operation, :otype_id => "1") %>"><%= t('report_generator.profits', :count => 2) %></a></li>
+          <li class="mb-1"><a class="link-dark  text-decoration-none" href="<%= reports_index_path %>"><%= t('report_generator.title') %></a></li>
         </ul>
       </div>
       <div class="col-6 col-md">
-        <h5>Resources</h5>
+        <h5>За категоріями</h5>
         <ul class="list-unstyled text-small">
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another resource</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="<%= reports_report_by_category_path(:otype_id => "2", :start_date => Date.today - 30, :end_date => Date.today) %>"><%= t('report_generator.expenses', :count => 2) %> за 30 днів</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="<%= reports_report_by_category_path(:otype_id => "2", :start_date => Date.today - 7, :end_date => Date.today) %>"><%= t('report_generator.expenses', :count => 2) %> за 7 днів</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="<%= reports_report_by_category_path(:otype_id => "1", :start_date => Date.today - 30, :end_date => Date.today) %>"><%= t('report_generator.profits', :count => 2) %> за 30 днів</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="<%= reports_report_by_category_path(:otype_id => "1", :start_date => Date.today - 7, :end_date => Date.today) %>"><%= t('report_generator.profits', :count => 2) %> за 7 днів</a></li>
         </ul>
       </div>
       <div class="col-6 col-md">
-        <h5>About</h5>
+        <h5>По датам</h5>
+        <ul class="list-unstyled text-small">
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="<%= reports_report_by_dates_path(:otype_id => "2", :start_date => Date.today - 30, :end_date => Date.today) %>"><%= t('report_generator.expenses', :count => 2) %> за 30 днів</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="<%= reports_report_by_dates_path(:otype_id => "2", :start_date => Date.today - 7, :end_date => Date.today) %>"><%= t('report_generator.expenses', :count => 2) %> за 7 днів</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="<%= reports_report_by_dates_path(:otype_id => "1", :start_date => Date.today - 30, :end_date => Date.today) %>"><%= t('report_generator.profits', :count => 2) %> за 30 днів</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="<%= reports_report_by_dates_path(:otype_id => "1", :start_date => Date.today - 7, :end_date => Date.today) %>"><%= t('report_generator.profits', :count => 2) %> за 7 днів</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Тренди</h5>
         <ul class="list-unstyled text-small">
           <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team</a></li>
           <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Locations</a></li>

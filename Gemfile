@@ -73,8 +73,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
-  # Use sqlite3 as the database for Active Record
-  gem "sqlite3", "~> 1.4"
 end
 
 gem "faker", "~> 3.1"
