@@ -1,1 +1,1 @@
-<li class = "mb-3"><mark><b><%= operation.amount %></b></mark> <%= operation.description %> <small>(<%= l(operation.odate, format: '%d %B') %>)</small></li>
+<li class = "mb-3"><mark><b><%= operation.amount %></b></mark><a class="text-decoration-none" href="<%= operation_url(:id => operation.id) %>"> <%= operation.description %></a> <small>(<%= l(operation.odate, format: '%d %B') %>)</small></li>
