@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'trends/index'
+  get 'trends/trend_by_category'
   resources :otypes
   get 'reports/index'
   get 'reports/report_by_category'

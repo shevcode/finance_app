@@ -1,0 +1,12 @@
+<h1><%= t('activemodel.models.trends_controller/trend', :count => 2) %> </h1>
+<% if @trend.present? && @trend.errors.any? %>
+    <div id="errors" style="color: red">
+        <h2><%= t('activemodel.errors.template.header', :model => @trend.model_name.human, :count => @trend.errors.count) %></h2>
+        <ul>
+            <% @trend.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+

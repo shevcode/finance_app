@@ -137,6 +137,9 @@ uk:
           zero: "Жодного %{entry_name}"
   activemodel:
     models:
+      trends_controller/trend:
+        one: "Тренд"
+        other: "Тренди"
       reports_controller/report:
         one: "Звіт"
         other: "Звіти"
