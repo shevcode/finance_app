@@ -22,8 +22,13 @@ class TrendsController < ApplicationController
         @trend.category_name = t('label_all') + ' ' + Category.model_name.human(:count => 2)
       end
 
-      category_sum_last_month = Operation.last_month.category_is(@trend.category_id).type_is(2).sum(:amount)
-      p category_sum_last_month
+      # category_sum_last_month = Operation
+      #   .last_month
+      #   .category_is(@trend.category_id)
+      #   .type_is(2)
+      #   .group("DATE_TRUNC('month', odate)")
+      #   .sum(:amount)
+      
 
 
       respond_to do |format|
