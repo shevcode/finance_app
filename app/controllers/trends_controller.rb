@@ -4,9 +4,9 @@ class TrendsController < ApplicationController
   class Trend
     include ActiveModel::Model
     validates :period, inclusion: { in: %w(week month) }
-    validates :category_id, :period, presence: true
-    validates :category_id, format: { with: /\d{1,2}/ }
-    attr_accessor :period, :category_id, :category_name
+    validates :period, presence: true
+    validates :category_id, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 100 }, allow_blank: true
+    attr_accessor :period, :category_id, :category_name, :sum_by_categories_and_periods
   end
 
   def index
@@ -22,13 +22,23 @@ class TrendsController < ApplicationController
         @trend.category_name = t('label_all') + ' ' + Category.model_name.human(:count => 2)
       end
 
-      # category_sum_last_month = Operation
-      #   .last_month
-      #   .category_is(@trend.category_id)
-      #   .type_is(2)
-      #   .group("DATE_TRUNC('month', odate)")
-      #   .sum(:amount)
+      sum_by_categories_and_periods = Operation
+        .joins(:category)
+        .type_is(2)
+        .group(:name)
+        .group_by_period(@trend.period)
+        .sum(:amount)
       
+
+      
+      new_hash = sum_by_categories_and_periods
+        .group_by {|key, value| key[0] }
+        .transform_values do |value|
+          value.each {|item| item.flatten!.shift}
+        end 
+        
+
+      @trend.sum_by_categories_and_periods = new_hash
 
 
       respond_to do |format|

@@ -1,3 +1,4 @@
 <p style="color: green"><%= notice %></p>
 <h1><%= @trend.model_name.human(:count => 1) %>
 <h2><%=@trend.period%> : <%=@trend.category_name %></h2>
+ <%=@trend.sum_by_categories_and_periods%>
