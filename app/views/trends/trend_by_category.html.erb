@@ -1,4 +1,37 @@
 <p style="color: green"><%= notice %></p>
-<h1><%= @trend.model_name.human(:count => 1) %>
-<h2><%=@trend.period%> : <%=@trend.category_name %></h2>
- <%=@trend.sum_by_categories_and_periods%>
+<h1><%= @trend.model_name.human(:count => 2) %>
+
+<h2><%= @trend.period == "month" ? t('label_last_n_months', :count => @trend.ago) : t('label_last_n_weeks', :count => @trend.ago)%></h2> 
+<%# <%= l(Date.today, format: '%b') %> 
+  <div class="row row-cols-1  mb-3 text-center">
+    <div class="col">
+      <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-body">
+            <canvas id="mainTrendsChart"></canvas>
+            <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                const ctx = document.getElementById('mainTrendsChart');
+                let chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        datasets: [
+                            <%= render partial: "one_category_in_period",  collection: @trend.sum_by_categories_and_periods %>
+                        ],
+                    },
+                    // options: {
+                    //     scales: {
+                    //         x: {
+                    //             min: '1995-11-07 00:00:00',
+                    //         }
+                    //     }
+                    // }
+                });
+
+               
+            </script>
+        </div>
+      </div>
+    </div>
+  </div>
+

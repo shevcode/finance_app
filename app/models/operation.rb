@@ -14,9 +14,11 @@ class Operation < ApplicationRecord
   scope :this_month, -> {where(odate: Date.today.beginning_of_month..Date.today.end_of_month)}
   scope :top_x, ->(top_count) { order(amount: :desc).limit(top_count) }
   scope :group_by_period, ->(period) { period == "month" ? group("DATE_TRUNC('month', odate)") : group("DATE_TRUNC('week', odate)")}
+  scope :last_x_periods, ->(x, period) {
+     period == "month" ?
+     where(odate: Date.today.months_ago(x).beginning_of_month..Date.today) : 
+     where(odate: Date.today.weeks_ago(x).beginning_of_week..Date.today)
+    }
   paginates_per 10
 
-
-
 end
-#odate: Date.today.prev_month.beginning_of_month..Date.today.prev_month.end_of_month
