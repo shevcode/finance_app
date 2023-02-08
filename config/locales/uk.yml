@@ -137,6 +137,9 @@ uk:
           zero: "Жодного %{entry_name}"
   activemodel:
     models:
+      trends_controller/trend:
+        one: "Тренд"
+        other: "Тренди"
       reports_controller/report:
         one: "Звіт"
         other: "Звіти"
@@ -624,7 +627,9 @@ uk:
   label_send_information: Відправити користувачеві інформацію з облікового запису
   label_year: Рік
   label_month: Місяць
-  label_week: Неділя
+  label_week: Тиждень
+  label_months: Місяці
+  label_weeks: Тижні
   label_date_from: З
   label_date_to: Кому
   label_language_based: На основі мови користувача
@@ -786,6 +791,8 @@ uk:
   label_downloads_abbr: Завантажень
   label_this_month: цей місяць
   label_last_n_days: "останні %{count} днів"
+  label_last_n_months: "останні %{count} місяці"
+  label_last_n_weeks: "останні %{count} тижні"
   label_all_time: весь час
   label_this_year: цей рік
   label_date_range: інтервал часу
@@ -1153,7 +1160,6 @@ uk:
   permission_set_notes_private: Розміщення приватних коментарів
   label_no_issues_in_project: в проекті немає задач
   label_any: Усі
-  label_last_n_weeks: минулий(і) %{count} тиждень(ні)
   setting_cross_project_subtasks: Дозволити підзадачі між проектами
   label_cross_project_descendants: З підпроектами
   label_cross_project_tree: З деревом проектів
@@ -1304,9 +1310,11 @@ uk:
     button_reset: "Очистити"
     button_by_categories: "Графік"
     button_by_dates: "По датам"
+    button_see_trends: "Дивитись тренди"
     expenses:
       one: "Витрата"
       other:  "Витрати"
     profits:
       one: "Дохід"
       other: "Доходи"
+    period: "Період"

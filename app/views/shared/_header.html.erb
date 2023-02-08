@@ -5,9 +5,10 @@
       </a>
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/operations">Транзакції</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/categories">Категорії</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/reports/index">Звіти</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" href="<%= operations_path %>"><%= Operation.model_name.human(:count => 2) %></a>
+        <a class="me-3 py-2 text-dark text-decoration-none" href="<%= categories_path %>"><%= Category.model_name.human(:count => 2) %></a>
+        <a class="me-3 py-2 text-dark text-decoration-none" href="<%= reports_index_path %>"><%= t('activemodel.models.reports_controller/report', :count => 2) %></a>
+        <a class="me-3 py-2 text-dark text-decoration-none" href="<%= trends_trend_by_category_path %>"><%= t('activemodel.models.trends_controller/trend', :count => 2) %></a>
       </nav>
     </div>
   </header>

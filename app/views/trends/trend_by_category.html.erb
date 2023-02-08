@@ -1,0 +1,83 @@
+<p style="color: green"><%= notice %></p>
+<h1><%= @trend.model_name.human(:count => 2) %></h1>
+<div class="p-5 mb-5 bg-none border rounded-3">
+  <%= form_with method: :get do |form| %>
+    <div class="row">
+      <div class="col">
+        <label for="periodRange" class="form-label fs-3 fw-bolder"><output name="range_output" for="periodRange"><%= @trend.present? ? @trend.ago : "2"%></output></label>
+        <input name="ago" type="range" class="form-range" id="periodRange" value="<%= @trend.present? ? @trend.ago : "2"%>" min="2" max="24" oninput="range_output.value = this.value">
+      </div>
+      <div class="col">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="period" id="monthRadio" value="month" checked>
+          <label class="form-check-label" for="monthRadio"><%= t('label_months') %></label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="period" id="weekRadio" value="week" <%= "checked" if @trend.present? && @trend.period == "week" %> >
+          <label class="form-check-label" for="weekRadio"><%= t('label_weeks') %></label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-floating mb-3">
+          <%= form.select :category_id, Category.all.collect { |p| [ p.name, p.id ] }.unshift([t('label_all'), ""]) , {}, { :class => 'form-select', :id => 'categorySelectGrid' } %>
+          <label for="categorySelectGrid"><%= Category.model_name.human %></label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="mb-3">
+            <%= button_tag type: 'submit', formaction: trends_trend_by_category_path, class: "btn btn-lg btn-outline-primary" do %>
+                <i class="bi bi-bar-chart-fill"></i> <%= t('report_generator.button_see_trends') %>
+            <% end %> 
+      </div>
+    </div>
+    
+  <% end %>
+</div>
+
+
+<% if @trend.present? && @trend.errors.any? %>
+    <div id="errors" style="color: red">
+        <h2><%= t('activemodel.errors.template.header', :model => @trend.model_name.human, :count => @trend.errors.count) %></h2>
+        <ul>
+            <% @trend.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+<hr>
+<h2><%= @trend.period == "month" ? t('label_last_n_months', :count => @trend.ago) : t('label_last_n_weeks', :count => @trend.ago)%> <%= Category.find(@trend.category_id).name if @trend.category_id.present? %></h2> 
+
+  <div class="row row-cols-1  mb-3 text-center">
+    <div class="col">
+      <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-body">
+            <canvas id="mainTrendsChart"></canvas>
+            <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                const ctx = document.getElementById('mainTrendsChart');
+                let chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        datasets: [
+                            <%= render partial: "one_category_in_period",  collection: @trend.sum_by_categories_and_periods %>
+                        ],
+                    },
+                    // options: {
+                    //     scales: {
+                    //         x: {
+                    //             min: '1995-11-07 00:00:00',
+                    //         }
+                    //     }
+                    // }
+                });
+
+               
+            </script>
+        </div>
+      </div>
+    </div>
+  </div>
+

@@ -8,10 +8,11 @@
 require "faker"
 100.times do
     Operation.create(
-        amount: Faker::Number.decimal(l_digits: 2, r_digits: 2),
-        odate: Faker::Date.backward(days: 10),
-        description: Faker::Quote.yoda,
-        category_id: Faker::Number.between(from: 1, to: 3),
-        otype_id: Faker::Number.between(from: 1, to: 2)
+        amount: Faker::Number.decimal(l_digits: 3, r_digits: 2),
+        odate: Faker::Date.backward(days: 30),
+        description: Faker::Food.dish,
+        category_id: Faker::Number.between(from: 1, to: 5),
+        otype_id: 2
+        # Faker::Number.between(from: 1, to: 2)
     )
 end
