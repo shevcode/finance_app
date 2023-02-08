@@ -31,7 +31,7 @@
             <%= render partial: "operation", collection: @top3ops %>
         </ol>        
     </div>
-    <a href="<%= operations_url %>" class="btn btn-lg btn-outline-primary mt-3" role="button"><%= t('label_all') + ' ' + Operation.model_name.human(:count => 2).downcase %></a>
+    <a href="<%= trends_trend_by_category_path %>" class="btn btn-lg btn-outline-primary mt-3" role="button"><%= t('report_generator.button_see_trends') %></a>
   </div>
 </div>
 
