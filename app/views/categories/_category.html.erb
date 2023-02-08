@@ -1,6 +1,6 @@
 <tr id="<%= dom_id category %>">
       <th scope="row"><%= category.id %></th>
-      <td><%= category.name %></td>
+      <td><a href="<%= operations_path(:category_id => category.id) %>"><%= category.name %></a></td>
       <td><%= category.description %></td>
       <td>
         <div class="d-flex justify-content-around">

@@ -54,8 +54,9 @@
       <div class="card mb-4 rounded-3 shadow-sm">
         <div class="card-body">
             <canvas id="mainTrendsChart"></canvas>
-            <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
             <script>
                 const ctx = document.getElementById('mainTrendsChart');
                 let chart = new Chart(ctx, {
@@ -65,13 +66,24 @@
                             <%= render partial: "one_category_in_period",  collection: @trend.sum_by_categories_and_periods %>
                         ],
                     },
-                    // options: {
-                    //     scales: {
-                    //         x: {
-                    //             min: '1995-11-07 00:00:00',
-                    //         }
-                    //     }
-                    // }
+                    options: {
+                        scales: {
+                            x: {
+                                type: 'time',
+                                time: {
+                                  <%= @trend.period == "month" ? raw("unit: 'month'") : raw("unit: 'week'")%>,
+                                  displayFormats: {
+                                    week: 'W (D MMM)'
+                                  }
+                                },
+                                adapters: { 
+                                  date: {
+                                    locale: 'uk-UA'
+                                  },
+                                },
+                            }
+                        }
+                    }
                 });
 
                
