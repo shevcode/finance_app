@@ -3,7 +3,7 @@
     data: [
         <% one_category_in_period[0].each do |period| %>
             {
-                x: '<%= @trend.period == "month" ? l( period[0], format: '%b') : period[0] %>',
+                x: '<%= @trend.period == "month" ? l(period[0], format: '%b') : l(period[0], format: '%W (%e %b)') %>',
                 y: '<%= period[1] %>'
             },
         <% end %>

@@ -59,7 +59,7 @@ class TrendsController < ApplicationController
       end  
     else
       respond_to do |format|
-        format.html { render :index, status: :unprocessable_entity }
+        format.html { render :trend_by_category, status: :unprocessable_entity }
         format.json { render json: @trend.errors, status: :unprocessable_entity } 
       end 
 
@@ -68,6 +68,6 @@ class TrendsController < ApplicationController
 
   private
   def set_trend
-    @trends_params = params.permit(:period, :ago, :category_id)
+    @trends_params = params.permit(:period, :ago, :category_id, :button).except(:button)
   end
 end
