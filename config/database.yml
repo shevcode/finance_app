@@ -31,10 +31,10 @@ test:
 
 production:
   adapter: postgresql
-  encoding: unicode
-  database: dfd1hcelk96ke9
-  host: ec2-23-20-224-166.compute-1.amazonaws.com
-  port: 5432
-  username: duxbxghugqrcwh
-  password: <%= ENV['HEROKU_DB_FINAPP'] %>
+  encoding: utf8
+  database: <%= ENV['RDS_DB_NAME'] %>
+  username: <%= ENV['RDS_USERNAME'] %>
+  password: <%= ENV['RDS_PASSWORD'] %>
+  host: <%= ENV['RDS_HOSTNAME'] %>
+  port: <%= ENV['RDS_PORT'] %>
 

@@ -1,17 +1,19 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.2"
+ruby "3.0.5"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4"
+
+gem "pg", "1.2.3"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 5.0"
+gem "puma", "6.0.2"
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
@@ -35,7 +37,7 @@ gem "jbuilder"
 # gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data"
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -61,12 +63,10 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
   # Use sqlite3 as the database for Active Record
-  gem "sqlite3", "~> 1.4"
+  #gem "sqlite3", "~> 1.4"
 end
 
-group :production do
-  gem "pg"
-end
+
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
@@ -78,3 +78,5 @@ end
 gem "faker", "~> 3.1"
 
 gem "kaminari", "~> 1.2"
+
+gem "pkg-config", "~> 1.5"
